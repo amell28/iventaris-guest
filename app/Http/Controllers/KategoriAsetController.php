@@ -1,0 +1,88 @@
+<?php
+// app/Http/Controllers/KategoriAsetController.php
+
+namespace App\Http\Controllers;
+
+use App\Models\KategoriAset;
+use Illuminate\Http\Request;
+
+class KategoriAsetController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $kategoriAset = KategoriAset::orderBy('nama')->get();
+        return view('guest.kategoriAset.index', compact('kategoriAset'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('guest.kategoriAset.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'kode' => 'required|string|max:50|unique:kategori_aset',
+            'deskripsi' => 'nullable|string'
+        ]);
+
+        KategoriAset::create($request->all());
+
+        return redirect()->route('kategoriAset.index')
+                        ->with('success', 'Kategori aset berhasil ditambahkan!');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(KategoriAset $kategoriAset)
+    {
+        return view('guest.kategoriAset.show', compact('kategoriAset'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(KategoriAset $kategoriAset)
+    {
+        return view('guest.kategoriAset.edit', compact('kategoriAset'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, KategoriAset $kategoriAset)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'kode' => 'required|string|max:50|unique:kategori_aset,kode,' . $kategoriAset->kategori_id . ',kategori_id',
+            'deskripsi' => 'nullable|string'
+        ]);
+
+        $kategoriAset->update($request->all());
+
+        return redirect()->route('kategoriAset.index')
+                        ->with('success', 'Kategori aset berhasil diupdate!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(KategoriAset $kategoriAset)
+    {
+        $kategoriAset->delete();
+
+        return redirect()->route('kategoriAset.index')
+                        ->with('success', 'Kategori aset berhasil dihapus!');
+    }
+}
