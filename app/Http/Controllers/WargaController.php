@@ -11,8 +11,9 @@ class WargaController extends Controller
      */
     public function index()
     {
-        $data['dataWarga'] = Warga::all();
-        return view('guest.warga.index', $data);
+         $dataWarga = Warga::all();
+    return view('guest.warga.index', compact('dataWarga'));
+    
     }
 
     /**
