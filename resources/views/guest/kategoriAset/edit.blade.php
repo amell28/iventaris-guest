@@ -1,88 +1,7 @@
-<!DOCTYPE html>
-<html class="no-js" lang="">
+@extends('layouts.guest.app')
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Edit Kategori Aset - Bina Desa</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets-guest/images/favicon.svg') }}" />
-
-    <!-- ========================= CSS here ========================= -->
-    <link rel="stylesheet" href="{{ asset('assets-guest/css/bootstrap-5.0.0-beta2.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets-guest/css/LineIcons.2.0.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets-guest/css/main.css') }}" />
-
-    <style>
-        .container-custom {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .card-form {
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: none;
-        }
-    </style>
-</head>
-
-<body>
-    <!-- ========================= preloader start ========================= -->
-    <div class="preloader">
-        <div class="loader">
-            <div class="spinner">
-                <div class="spinner-container">
-                    <div class="spinner-rotator">
-                        <div class="spinner-left">
-                            <div class="spinner-circle"></div>
-                        </div>
-                        <div class="spinner-right">
-                            <div class="spinner-circle"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- preloader end -->
-
-    <!-- ========================= header start ========================= -->
-    <header class="header">
-        <div class="navbar-area">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-12">
-                        <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand" href="{{ route('dashboard') }}">
-                                <p>Bina Desa</p>
-                            </a>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="toggler-icon"></span>
-                                <span class="toggler-icon"></span>
-                                <span class="toggler-icon"></span>
-                            </button>
-
-                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
-                                <div class="navbar-nav ms-auto py-0">
-                                    <a href="{{ url('/dashboard') }}" class="nav-item nav-link active">Home</a>
-                                    <a href="{{ route('warga.index') }}" class="nav-item nav-link">Data Warga</a>
-                                    <a href="{{ route('kategoriAset.index') }}" class="nav-item nav-link">Kategori Aset</a>
-
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ========================= header end ========================= -->
-
-    <!-- Main Content -->
+@section('content')
+    <!-- Main Content start -->
     <section class="pt-120 pb-80">
         <div class="container-custom">
             <div class="row">
@@ -147,9 +66,5 @@
             </div>
         </div>
     </section>
-
-    <!-- ========================= JS here ========================= -->
-    <script src="{{ asset('assets-guest/js/bootstrap-5.0.0-beta2.min.js') }}"></script>
-    <script src="{{ asset('assets-guest/js/main.js') }}"></script>
-</body>
-</html>
+    <!-- Main Content start -->
+@endsection

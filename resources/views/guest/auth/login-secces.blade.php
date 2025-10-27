@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #a89bb5 100%);
+            background: linear-gradient(135deg, #6cddfc 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -23,6 +23,17 @@
             max-width: 500px;
             width: 100%;
         }
+        .success-icon {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 1.5rem;
+        }
+        .btn-back {
+            background: #2c3e50;
+            border: none;
+            padding: 10px 30px;
+            margin-top: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -30,17 +41,23 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="success-container">
+                    <div class="success-icon">
+
+                    </div>
+
                     <h2 class="text-success mb-3">Login Berhasil!</h2>
 
-                <div class="mt-4">
-                    <p><strong> Data yang akan dikirim: </strong></p>
-                    <ul class="list-unstyled">
-                        <li> Username: <strong>{{ $username}}</strong></li>
-                        <li> Password: <strong>{{ $password}}</strong></li>
-                    </ul>
-                </div>
+                    @if(isset($success))
+                        <div class="alert alert-success" role="alert">
+                            {{ $success }}
+                        </div>
+                    @endif
 
-                    <a href="/auth" class="btn btn-primary">Kembali ke Login</a>
+                    <p class="text-muted mb-4">
+                        Selamat! Anda berhasil login ke sistem inventaris.
+                    </p>
+
+                    <a href="/dashboard" class="btn btn-back btn-primary">Masuk ke Halaman Iventaris dan Aset</a>
                 </div>
             </div>
         </div>
