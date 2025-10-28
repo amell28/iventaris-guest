@@ -24,19 +24,19 @@
             <div class="row mb-5">
                 <div class="col-md-4">
                     <div class="stats-card">
-                        <div class="stats-number">{{ $dataUsers->count() }}</div>
+                        <div class="stats-number">{{ $dataUser->count() }}</div>
                         <div class="stats-label">Total User</div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="stats-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                        <div class="stats-number">{{ $dataUsers->where('created_at', '>=', now()->subMonth())->count() }}</div>
+                        <div class="stats-number">{{ $dataUser->where('created_at', '>=', now()->subMonth())->count() }}</div>
                         <div class="stats-label">User Baru (30 Hari)</div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="stats-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                        <div class="stats-number">{{ $dataUsers->where('email_verified_at', '!=', null)->count() }}</div>
+                        <div class="stats-number">{{ $dataUser->where('email_verified_at', '!=', null)->count() }}</div>
                         <div class="stats-label">Email Terverifikasi</div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
 
             <!-- User Cards -->
             <div class="row" id="userContainer">
-                @forelse ($dataUsers as $user)
+                @forelse ($dataUser as $user)
                     <div class="col-xl-4 col-lg-6 col-md-6 mb-4 user-item">
                         <div class="card user-card">
                             <!-- Compact Header -->

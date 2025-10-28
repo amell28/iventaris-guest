@@ -110,15 +110,10 @@ class AuthController extends Controller
                 'password_confirmation.required' => 'Konfirmasi password tidak boleh kosong'
             ]);
 
-            // Cek validasi
-            if ($validator->fails()) {
-                return redirect('/auth/register')
-                    ->withErrors($validator)
-                    ->withInput();
-            }
+
 
             // Buat user baru
-            $user = User::create([
+            $User = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),

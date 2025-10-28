@@ -31,4 +31,6 @@ Route::resource('kategoriAset', KategoriAsetController::class);
 
 Route::resource('user', UserController::class);
 
-
+Route::get('/', function () {
+    return redirect()->route('dashboard');
+});

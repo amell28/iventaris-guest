@@ -12,7 +12,6 @@ class User extends Authenticatable
     use HasFactory;
 
     // Tentukan nama tabel yang digunakan
-    protected $table = 'User';
 
     protected $fillable = [
         'name',

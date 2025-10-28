@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data['dataUsers'] = User::all();
+        $data['dataUser'] = User::all();
         return view('guest.user.index', $data);
     }
 

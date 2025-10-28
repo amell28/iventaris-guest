@@ -86,7 +86,13 @@
                     <!-- Title -->
                     <h1 class="login-title text-center">Login Sistem Inventaris</h1>
 
-
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @endif
                     <!-- Error Messages -->
                     @if ($errors->any())
                         <div class="alert alert-danger">
