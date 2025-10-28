@@ -40,7 +40,9 @@
     <!-- ========================= footer end ========================= -->
 
     <!-- ========================= scroll-top ========================= -->
-    <a href="#" class="scroll-top btn-hover">
+    <a href="https://wa.me/6281234567890?text=Halo%20Bina%20Desa,%20saya%20ingin%20bertanya%20tentang%20sistem%20inventaris%20dan%20aset"
+
+     class="scroll-top btn-hover">
         <i class="lni lni-chevron-up"></i>
     </a>
 

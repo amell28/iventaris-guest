@@ -6,7 +6,7 @@
                     <nav class="navbar navbar-expand-lg">
                         <div class="logo">
                             <a href="{{ route('dashboard') }}"><img
-                                    src="{{ asset('assets-guest/images/logo/unnamed.png') }}" alt="Logo"></a>
+                                    src="{{ asset('assets-guest/images/logo/unnamed.png') }}" alt="Logo" height="40" class="me-2" ></a>
                         </div>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

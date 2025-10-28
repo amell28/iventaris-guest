@@ -50,26 +50,26 @@
             </div>
 
             <!-- Tambah Kategori dan Search Box -->
-        <div class="row mb-4 align-items-center">
-            <div class="col-md-6">
-                <a href="{{ route('warga.create') }}" class="main-btn btn-hover">
-                    <i class="lni lni-plus"></i> Tambah Warga
-                </a>
-            </div>
-            <div class="col-md-6">
-                <div class="search-box">
-                    <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <h5 class="mb-0">Cari Kategori Aset</h5>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control"
-                                placeholder="Ketik nama atau NIK anda..." id="searchInput">
+            <div class="row mb-4 align-items-center">
+                <div class="col-md-6">
+                    <a href="{{ route('user.create') }}" class="btn btn-success btn-sm">
+                        <i class="fas fa-plus me-1"></i>Tambah Data
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <div class="search-box">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h5 class="mb-0">Cari Kategori Aset</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Ketik nama atau NIK anda..."
+                                    id="searchInput">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
             <!-- Warga Cards -->
             <div class="row" id="wargaContainer">
@@ -139,19 +139,19 @@
                             <div class="action-buttons">
                                 <div class="row">
                                     <div class="col-6">
-                                        <a href="{{ route('warga.edit', $item->warga_id) }}"
-                                            class="btn btn-warning btn-sm w-100">
-                                            <i class="lni lni-pencil"></i> Edit
-                                        </a>
+                                        <button href="{{ route('warga.edit', $item->warga_id) }}"
+                                            class="btn btn-warning btn-sm text-white">
+                                            <i class="fas fa-edit me-1"></i> Edit
+                                        </button>
                                     </div>
                                     <div class="col-6">
                                         <form action="{{ route('warga.destroy', $item->warga_id) }}" method="POST"
                                             class="d-inline w-100">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm w-100"
+                                            <button type="submit" class="btn btn-danger btn-sm"
                                                 onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                <i class="lni lni-trash"></i> Hapus
+                                                <i class="fas fa-trash me-1"></i> Hapus
                                             </button>
                                         </form>
                                     </div>

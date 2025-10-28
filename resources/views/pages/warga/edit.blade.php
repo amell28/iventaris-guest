@@ -75,9 +75,8 @@
 
 								<div class="row mt-4">
 									<div class="col-12 text-center">
-										<button type="submit" class="main-btn btn-hover">Update Data</button>
-										<a href="{{ route('warga.index') }}" class="main-btn btn-hover border-btn ms-3">Batal</a>
-									</div>
+										<button type="submit" class="btn btn-primary btn-sm">Update Data</button>
+										<a href="{{ route('warga.index') }}" class="btn btn-secondary btn-sm">Batal</a>
 								</div>
 							</form>
 						</div>

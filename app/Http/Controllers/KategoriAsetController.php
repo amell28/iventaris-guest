@@ -14,7 +14,7 @@ class KategoriAsetController extends Controller
     public function index()
     {
         $kategoriAset = KategoriAset::orderBy('nama')->get();
-        return view('guest.kategoriAset.index', compact('kategoriAset'));
+        return view('pages.kategoriAset.index', compact('kategoriAset'));
     }
 
     /**
@@ -22,7 +22,7 @@ class KategoriAsetController extends Controller
      */
     public function create()
     {
-        return view('guest.kategoriAset.create');
+        return view('pages.kategoriAset.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class KategoriAsetController extends Controller
      */
     public function show(KategoriAset $kategoriAset)
     {
-        return view('guest.kategoriAset.show', compact('kategoriAset'));
+        return view('pages.kategoriAset.show', compact('kategoriAset'));
     }
 
     /**
@@ -55,7 +55,7 @@ class KategoriAsetController extends Controller
      */
     public function edit(KategoriAset $kategoriAset)
     {
-        return view('guest.kategoriAset.edit', compact('kategoriAset'));
+        return view('pages.kategoriAset.edit', compact('kategoriAset'));
     }
 
     /**

@@ -41,12 +41,12 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Tambah Kategori dan Search Box -->
             <div class="row mb-4 align-items-center">
                 <div class="col-md-6">
-                    <a href="{{ route('kategoriAset.create') }}" class="main-btn btn-hover">
-                        <i class="lni lni-plus"></i> Tambah Kategori
+                    <a href="{{ route('kategoriAset.create') }}" class="btn btn-success btn-sm">
+                        <i class="fas fa-plus me-1"></i>Tambah Data
                     </a>
                 </div>
                 <div class="col-md-6">
@@ -122,11 +122,11 @@
                     <div class="col-12">
                         <div class="card text-center py-5">
                             <div class="card-body">
-                                <i class="lni lni-inbox display-1 text-muted mb-3"></i>
+
                                 <h4 class="text-muted">Belum ada data kategori aset</h4>
                                 <p class="text-muted">Mulai dengan menambahkan kategori pertama</p>
-                                <a href="{{ route('kategoriAset.create') }}" class="main-btn btn-hover">
-                                    <i class="lni lni-plus"></i> Tambah Kategori Pertama
+                                <a href="{{ route('kategoriAset.create') }}" class="btn btn-success btn-sm">
+                                    <i class="fas fa-plus me-1"></i>Tambah KategoriPertama
                                 </a>
                             </div>
                         </div>

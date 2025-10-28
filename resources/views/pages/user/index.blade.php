@@ -45,8 +45,8 @@
             <!-- Tambah User dan Search Box -->
             <div class="row mb-4 align-items-center">
                 <div class="col-md-6">
-                    <a href="{{ route('user.create') }}" class="main-btn btn-hover">
-                        <i class="lni lni-plus"></i> Tambah User
+                   <a href="{{ route('user.create') }}" class="btn btn-success btn-sm">
+                        <i class="fas fa-plus me-1"></i>Tambah Data
                     </a>
                 </div>
                 <div class="col-md-6">

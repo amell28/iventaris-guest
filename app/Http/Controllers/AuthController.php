@@ -16,7 +16,7 @@ class AuthController extends Controller
      */
     public function index(): View
     {
-        return view('guest.auth.login-form');
+        return view('pages.auth.login-form');
     }
 
     /**
@@ -24,7 +24,7 @@ class AuthController extends Controller
      */
     public function showRegister(): View
     {
-        return view('guest.auth.register');
+        return view('pages.auth.register');
     }
 
     /**
@@ -72,7 +72,7 @@ class AuthController extends Controller
             }
 
             // Login berhasil - tampilkan dashboard
-            return view('guest.dashboard', [
+            return view('pages.dashboard', [
                 'user' => $users,
                 'success' => 'Login berhasil! Selamat datang di sistem inventaris.'
             ]);
