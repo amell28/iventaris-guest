@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{{ asset('assets-guest/css/bootstrap-5.0.0-beta2.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets-guest/css/LineIcons.2.0.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets-guest/css/main.css') }}" />
-
+<link rel="shortcut icon" href="{{ asset('assets-guest/images/logo/logo.png') }}" type="image/x-icon">
 <style>
     .container-custom {
         max-width: 1400px;

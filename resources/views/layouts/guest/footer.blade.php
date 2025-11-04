@@ -4,8 +4,8 @@
              <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10">
                  <div class="footer-widget">
                      <div class="logo">
-                         <a href="{{ route('dashboard') }}"> <img src="{{ asset('assets-guest/images/logo/logo.svg') }}"
-                                 alt="logo"> </a>
+                         <a href="{{ route('dashboard') }}"> <img src="{{ asset('assets-guest/images/logo/unnamed.png') }}"
+                                 alt="logo" height="80" class="me-2"> </a>
                      </div>
                      <p class="desc">Sistem Iventaris dan Aset.</p>
                  </div>
