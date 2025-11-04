@@ -8,7 +8,7 @@
 			<div class="row align-items-center">
 				<div class="col-xl-6 col-lg-6 col-md-10">
 					<div class="hero-content">
-						<h1>Sistem Manajemen Inventaris dan Aset Desa</h1>
+						<h1><i class="lni lni-display"></i> Sistem Manajemen Inventaris dan Aset Desa</h1>
 						<p class="mt-3">Platform digital terintegrasi untuk mengelola dan memantau seluruh inventaris serta aset desa secara efisien, transparan, dan akurat.</p>
 						<a href="#about" class="main-btn btn-hover border-btn mt-3">Pelajari Lebih Lanjut</a>
 					</div>
@@ -29,7 +29,7 @@
 			<div class="row">
 				<div class="col-lg-6 order-last order-lg-first">
 					<div class="about-image">
-						<img src="{{asset('assets-guest/images/about/asset-tracking.svg') }}" alt="Pelacakan Aset Desa">
+						<img src="{{asset('assets-guest/images/about/perenc') }}" alt="Pelacakan Aset Desa">
 					</div>
 				</div>
 				<div class="col-lg-6">

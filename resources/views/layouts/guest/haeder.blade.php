@@ -21,7 +21,7 @@
                                 <a href="{{ url('dashboard') }}"
                                     class="nav-item nav-link {{ request()->is('dashboard') ? 'active' : '' }}">About</a>
                                 <a href="{{ route('warga.index') }}"
-                                    class="nav-item nav-link {{ request()->is('warga*') ? 'active' : '' }}">Data
+                                    class="nav-item nav-link {{ request()->is('warga*') ? 'active' : '' }}"> <i class="text-danger" data-feather="archive"></i> Data
                                     Warga</a>
                                 <a href="{{ route('kategoriAset.index') }}"
                                     class="nav-item nav-link {{ request()->is('kategoriAset*') ? 'active' : '' }}">Kategori

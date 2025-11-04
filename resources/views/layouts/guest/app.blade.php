@@ -1,10 +1,13 @@
+{{-- import { AiOutlineWhatsApp } from "react-icons/ai"; --}}
+
+
 <!DOCTYPE html>
 <html class="no-js" lang="">
 
 <head>
     <!-- CSS Start-->
     @include('layouts.guest.css')
-    {{-- CSS End --}}
+
 </head>
 
 <body>
@@ -40,10 +43,9 @@
     <!-- ========================= footer end ========================= -->
 
     <!-- ========================= scroll-top ========================= -->
-    <a href="https://wa.me/6281234567890?text=Halo%20Bina%20Desa,%20saya%20ingin%20bertanya%20tentang%20sistem%20inventaris%20dan%20aset"
-
-     class="scroll-top btn-hover">
-        <i class="lni lni-chevron-up"></i>
+    <a href="https://wa.me/6289620842942?text=Halo%20Admin,%20saya%20mau%20bertanya" class="whatsapp-float" img src="{{ asset('assets-guest/images/logo/whatsapp.png') }}"
+        target="_blank">
+        <i class="lni lni-whatsapp"></i>
     </a>
 
     {{-- JSS start --}}
