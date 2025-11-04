@@ -52,7 +52,7 @@
             <!-- Tambah Kategori dan Search Box -->
             <div class="row mb-4 align-items-center">
                 <div class="col-md-6">
-                    <a href="{{ route('user.create') }}" class="btn btn-success btn-sm">
+                    <a href="{{ route('warga.create') }}" class="btn btn-success btn-sm">
                         <i class="fas fa-plus me-1"></i>Tambah Data
                     </a>
                 </div>
@@ -78,7 +78,7 @@
                         <div class="card warga-card">
                             <div class="warga-header text-center">
                                 <div class="warga-avatar mx-auto">
-                                    <i class="lni lni-user"></i>
+                                    <i class="lni lni-warga"></i>
                                 </div>
                                 <h5 class="mb-1">{{ $item->nama }}</h5>
                                 <p class="mb-0 opacity-75">NIK: {{ $item->no_ktp }}</p>
