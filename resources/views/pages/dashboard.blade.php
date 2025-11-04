@@ -15,7 +15,7 @@
 				</div>
 				<div class="col-xxl-6 col-xl-6 col-lg-6">
 					<div class="hero-image text-center text-lg-end">
-						<img src="{{asset('assets-guest/images/hero/dome.png') }}" alt="Sistem Manajemen Inventaris">
+						<img style="width: auto; height: auto; max-width: 100%;" src="{{asset('assets-guest/images/hero/atas.png') }}" alt="Sistem Manajemen Inventaris">
 					</div>
 				</div>
 			</div>
