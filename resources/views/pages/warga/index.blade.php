@@ -136,21 +136,24 @@
                                 </div>
                             </div>
 
+
                             <div class="action-buttons">
                                 <div class="row">
                                     <div class="col-6">
-                                        <button href="{{ route('warga.edit', $item->warga_id) }}"
-                                            class="btn btn-warning btn-sm text-white">
+                                        {{-- Route disesuaikan ke user.edit dengan $user->id --}}
+                                        <a href="{{ route('warga.edit', $item->warga_id) }}"
+                                            class="btn btn-warning btn-sm text-white w-100">
                                             <i class="fas fa-edit me-1"></i> Edit
-                                        </button>
+                                        </a>
                                     </div>
                                     <div class="col-6">
+                                        {{-- Route disesuaikan ke user.destroy dengan $user->id --}}
                                         <form action="{{ route('warga.destroy', $item->warga_id) }}" method="POST"
                                             class="d-inline w-100">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                            <button type="submit" class="btn btn-danger btn-sm w-100"
+                                                onclick="return confirm('Apakah Anda yakin ingin menghapus warga: {{ $item->name }}?')">
                                                 <i class="fas fa-trash me-1"></i> Hapus
                                             </button>
                                         </form>
