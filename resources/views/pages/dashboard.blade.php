@@ -2,67 +2,65 @@
 
 @section('content')
 {{-- main content start --}}
-	<!-- ========================= hero-section start ========================= -->
-	<section id="home" class="hero-section">
+	<section id="home" class="hero-section pt-120 pb-80">
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-xl-6 col-lg-6 col-md-10">
 					<div class="hero-content">
-						<h1><i class="lni lni-display"></i> Sistem Manajemen Inventaris dan Aset Desa</h1>
+						<h1>Sistem Manajemen Inventaris dan Aset Desa</h1>
 						<p class="mt-3">Platform digital terintegrasi untuk mengelola dan memantau seluruh inventaris serta aset desa secara efisien, transparan, dan akurat.</p>
-						<a href="#about" class="main-btn btn-hover border-btn mt-3">Pelajari Lebih Lanjut</a>
+						<a href="#about" class="main-btn btn-hover border-btn mt-4">Pelajari Lebih Lanjut</a>
 					</div>
 				</div>
 				<div class="col-xxl-6 col-xl-6 col-lg-6">
-					<div class="hero-image text-center text-lg-end">
-						<img style="width: auto; height: auto; max-width: 100%;" src="{{asset('assets-guest/images/hero/atas.png') }}" alt="Sistem Manajemen Inventaris">
+					<div class="hero-image text-center text-lg-end pt-5 pt-lg-0">
+						<img style="width: auto; height: auto; max-width: 100%;" src="{{asset('assets-guest/images/hero/ang-aset.png') }}" alt="Sistem Manajemen Inventaris">
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!-- ========================= hero-section end ========================= -->
+	<hr>
 
-	<!-- ========================= about-section start ========================= -->
-	<section id="about" class="about-section">
+	<section id="about" class="about-section pt-120 pb-80">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 order-last order-lg-first">
-					<div class="about-image">
-						<img src="{{asset('assets-guest/images/about/perenc') }}" alt="Pelacakan Aset Desa">
+					<div class="hero-image text-center text-lg-end pt-5 pt-lg-0">
+						<img style="width: auto; height: auto; max-width: 100%;" src="{{asset('assets-guest/images/about/perencanaan-aset.png') }}" alt="Pelacakan Aset Desa">
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="about-content-wrapper">
 						<div class="section-title">
+                            {{-- Judul dan Deskripsi Ditinggikan --}}
 							<h2 class="mb-20">Sistem Terpadu Pengelolaan Aset Desa</h2>
 							<p class="mb-30">Sistem Bina Desa dirancang khusus untuk membantu pemerintah desa dalam mengelola inventaris dan aset secara digital. Dengan sistem ini, setiap barang inventaris dan aset desa dapat tercatat, terpantau, dan terlacak dengan mudah, mengurangi resiko kehilangan dan meningkatkan akuntabilitas pengelolaan barang milik desa.</p>
 
-							<h5 class="mt-4">Fitur Utama Sistem:</h5>
-							<ul class="list-unstyled mt-3">
-								<li><i class="fas fa-check-circle text-success me-2"></i> Katalogisasi inventaris lengkap</li>
-								<li><i class="fas fa-check-circle text-success me-2"></i> Pelacakan kondisi dan lokasi aset</li>
-								<li><i class="fas fa-check-circle text-success me-2"></i> Pencatatan pemeliharaan berkala</li>
-								<li><i class="fas fa-check-circle text-success me-2"></i> Laporan real-time kondisi aset</li>
-								<li><i class="fas fa-check-circle text-success me-2"></i> Monitoring penggunaan inventaris</li>
+                            {{-- Fitur Utama Disesuaikan --}}
+							<h4 class="mt-4 mb-3">Fitur Utama Sistem:</h4>
+							<ul class="list-unstyled">
+								<li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Katalogisasi inventaris lengkap</li>
+								<li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Pelacakan kondisi dan lokasi aset</li>
+								<li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Pencatatan pemeliharaan berkala</li>
+								<li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Laporan real-time kondisi aset</li>
+
 							</ul>
 
-							<a href="#0" class="main-btn btn-hover border-btn mt-3">Lihat Demo Sistem</a>
+							<a href="#0" class="main-btn btn-hover border-btn mt-5">Lihat Demo Sistem</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!-- ========================= about-section end ========================= -->
+	<hr>
 
-
-	<!-- ========================= benefits-section start ========================= -->
-	<section id="benefits" class="benefits-section pt-100 pb-100" style="background-color: #f8f9fa;">
+	<section id="benefits" class="benefits-section pt-120 pb-80" style="background-color: #f8f9fa;">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xxl-5 col-xl-6 col-lg-7 col-md-10">
-					<div class="section-title text-center">
+					<div class="section-title text-center mb-50"> {{-- Menambahkan mb-50 untuk jarak --}}
 						<h2>Manfaat Penggunaan Sistem</h2>
 						<p>Keuntungan implementasi sistem manajemen inventaris dan aset digital</p>
 					</div>
@@ -71,52 +69,50 @@
 
 			<div class="row">
 				<div class="col-lg-6">
-					<div class="benefit-item d-flex mb-4">
+					<div class="benefit-item d-flex mb-4 p-3 border rounded shadow-sm bg-white">
 						<div class="icon flex-shrink-0">
 							<i class="fas fa-search-dollar fa-2x text-primary"></i>
 						</div>
 						<div class="content ms-4">
 							<h4>Transparansi Pengelolaan</h4>
-							<p>Setiap transaksi dan pergerakan aset tercatat rapi dan dapat diakses oleh pihak yang berwenang</p>
+							<p class="mb-0">Setiap transaksi dan pergerakan aset tercatat rapi dan dapat diakses oleh pihak yang berwenang</p>
 						</div>
 					</div>
 
-					<div class="benefit-item d-flex mb-4">
+					<div class="benefit-item d-flex mb-4 p-3 border rounded shadow-sm bg-white">
 						<div class="icon flex-shrink-0">
 							<i class="fas fa-chart-line fa-2x text-primary"></i>
 						</div>
 						<div class="content ms-4">
 							<h4>Efisiensi Operasional</h4>
-							<p>Mengurangi waktu pencarian aset dan mempermudah proses inventarisasi tahunan</p>
+							<p class="mb-0">Mengurangi waktu pencarian aset dan mempermudah proses inventarisasi tahunan</p>
 						</div>
 					</div>
 				</div>
 
 				<div class="col-lg-6">
-					<div class="benefit-item d-flex mb-4">
+					<div class="benefit-item d-flex mb-4 p-3 border rounded shadow-sm bg-white">
 						<div class="icon flex-shrink-0">
 							<i class="fas fa-shield-alt fa-2x text-primary"></i>
 						</div>
 						<div class="content ms-4">
 							<h4>Pengamanan Aset</h4>
-							<p>Meminimalisir resiko kehilangan dan penyalahgunaan aset desa</p>
+							<p class="mb-0">Meminimalisir resiko kehilangan dan penyalahgunaan aset desa</p>
 						</div>
 					</div>
 
-					<div class="benefit-item d-flex mb-4">
+					<div class="benefit-item d-flex mb-4 p-3 border rounded shadow-sm bg-white">
 						<div class="icon flex-shrink-0">
 							<i class="fas fa-file-invoice-dollar fa-2x text-primary"></i>
 						</div>
 						<div class="content ms-4">
 							<h4>Akuntabilitas Keuangan</h4>
-							<p>Laporan keuangan yang akurat terkait nilai dan penyusutan aset</p>
+							<p class="mb-0">Laporan keuangan yang akurat terkait nilai dan penyusutan aset</p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!-- ========================= benefits-section end ========================= -->
-
-{{-- main content end --}}
+	{{-- main content end --}}
 @endsection

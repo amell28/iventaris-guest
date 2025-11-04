@@ -15,9 +15,9 @@
                      <h3>Menu</h3>
                      <ul class="links">
                          <li><a href="{{ route('dashboard') }}">Home</a></li>
-                         <li><a href="{{ route('warga.index') }}">Data Warga</a></li>
+                         <li><a href="{{ route('warga.index') }}"> Warga</a></li>
                          <li><a href="{{ route('kategoriAset.index') }}">Kategori Aset</a></li>
-                         <li><a href="{{ route('user.index') }}">Data User</a></li>
+                         <li><a href="{{ route('user.index') }}"> User</a></li>
                      </ul>
                  </div>
              </div>
