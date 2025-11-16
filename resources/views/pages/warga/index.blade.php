@@ -52,8 +52,8 @@
             <!-- Tambah Kategori dan Search Box -->
             <div class="row mb-4 align-items-center">
                 <div class="col-md-6">
-                    <a href="{{ route('warga.create') }}" class="btn btn-success btn-sm">
-                        <i class="fas fa-plus me-1"></i>Tambah Data
+                    <a href="{{ route('warga.create') }}" class="main-btn btn-hover btn-sm">
+                        <i class="fas fa-plus me-1"></i>Tambah Data Aset
                     </a>
                 </div>
                 <div class="col-md-6">

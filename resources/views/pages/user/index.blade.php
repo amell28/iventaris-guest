@@ -50,9 +50,8 @@
 
             <div class="row mb-4 align-items-center">
                 <div class="col-md-6">
-                    {{-- Route disesuaikan ke user.create --}}
-                    <a href="{{ route('user.create') }}" class="btn btn-success btn-sm">
-                        <i class="fas fa-plus me-1"></i>Tambah Data
+                    <a href="{{ route('user.create') }}" class="main-btn btn-hover btn-sm">
+                        <i class="fas fa-plus me-1"></i>Tambah Data Aset
                     </a>
                 </div>
                 <div class="col-md-6">

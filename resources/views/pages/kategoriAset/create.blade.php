@@ -52,14 +52,14 @@
                                     @enderror
                                 </div>
 
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-                                    <a href="{{ route('kategoriAset.index') }}" class="btn btn-secondary btn-sm">
-                                        <i class="fas fa-arrow-left me-1"></i>Kembali
-                                    </a>
-                                    <button type="submit" class="btn btn-primary btn-sm">
-                                        <i class="fas fa-save me-1"></i>Simpan
-                                    </button>
-                                </div>
+                                <div class="d-flex justify-content-end">
+                                <a href="{{ route('kategoriAset.index') }}" class="main-btn border-btn me-3">
+                                    <i class="bi bi-arrow-left me-1"></i> Kembali
+                                </a>
+                                <button type="submit" class="main-btn btn-hover">
+                                    <i class="bi bi-save me-1"></i> Simpan Aset
+                                </button>
+                            </div>
                             </form>
                         </div>
                     </div>

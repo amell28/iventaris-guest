@@ -23,11 +23,13 @@
                                 <a href="{{ route('warga.index') }}"
                                     class="nav-item nav-link {{ request()->is('warga*') ? 'active' : '' }}"> </i>
                                     Warga</a>
-                                <a href="{{ route('kategoriAset.index') }}"
-                                    class="nav-item nav-link {{ request()->is('kategoriAset*') ? 'active' : '' }}">Kategori
-                                    Aset</a>
                                 <a href="{{ route('user.index') }}"
                                     class="nav-item nav-link {{ request()->is('user*') ? 'active' : '' }}"> User</a>
+                                    <a href="{{ route('kategoriAset.index') }}"
+                                    class="nav-item nav-link {{ request()->is('kategoriAset*') ? 'active' : '' }}">Kategori
+                                    Aset</a>
+                                 <a href="{{ route('aset.index') }}"
+                                    class="nav-item nav-link {{ request()->is('aset*') ? 'active' : '' }}"> Aset</a>
                                 <a href="{{ url('/auth') }}" class="nav-item nav-link">Login</a>
 
                                 {{-- <a href="{{ url('dashboard') }}" class="nav-item nav-link">Home</a>
