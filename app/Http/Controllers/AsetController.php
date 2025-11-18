@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Aset;
@@ -11,9 +10,14 @@ class AsetController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $aset = Aset::with('kategoriAset')->latest()->get();
+        $filterableColumns = ['kondisi'];
+        $aset              = Aset::with('kategoriAset')
+            ->filter($request) // Gunakan scope filter
+            ->latest()
+            ->paginate(5);
+
         return view('pages.aset.index', compact('aset'));
     }
 
@@ -22,7 +26,7 @@ class AsetController extends Controller
      */
     public function create()
     {
-         $kategoriAset = kategoriAset::all(); // Ambil semua kategori
+        $kategoriAset = kategoriAset::all(); // Ambil semua kategori
         return view('pages.aset.create', compact('kategoriAset'));
     }
 
@@ -31,15 +35,15 @@ class AsetController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
-            'kode_aset' => 'required|unique:aset,kode_aset',
-            'nama_aset' => 'required',
-            'kategori_id' => 'required|exists:kategori_aset,kategori_id',
+        $request->validate([
+            'kode_aset'         => 'required|unique:aset,kode_aset',
+            'nama_aset'         => 'required',
+            'kategori_id'       => 'required|exists:kategori_aset,kategori_id',
             'tanggal_perolehan' => 'required|date',
-            'nilai_perolehan' => 'required|numeric',
-            'kondisi' => 'required|in:Baik,Rusak Ringan,Rusak Berat',
-            'lokasi' => 'required',
-            'penanggung_jawab' => 'required'
+            'nilai_perolehan'   => 'required|numeric',
+            'kondisi'           => 'required|in:Baik,Rusak Ringan,Rusak Berat',
+            'lokasi'            => 'required',
+            'penanggung_jawab'  => 'required',
         ]);
 
         Aset::create($request->all());
@@ -53,7 +57,7 @@ class AsetController extends Controller
      */
     public function show(Aset $aset)
     {
-         return view('aset.show', compact('aset'));
+        return view('aset.show', compact('aset'));
     }
 
     /**
@@ -61,7 +65,7 @@ class AsetController extends Controller
      */
     public function edit(Aset $aset)
     {
-         $kategoriAset = kategoriAset::all(); // Ambil semua kategori
+        $kategoriAset = kategoriAset::all(); // Ambil semua kategori
         return view('pages.aset.edit', compact('aset', 'kategoriAset'));
     }
 
@@ -70,15 +74,15 @@ class AsetController extends Controller
      */
     public function update(Request $request, Aset $aset)
     {
-         $request->validate([
-            'kode_aset' => 'required|unique:aset,kode_aset,' . $aset->id . ',id',
-            'nama_aset' => 'required',
-            'kategori_id' => 'required|exists:kategori_aset,kategori_id', // Validasi baru
+        $request->validate([
+            'kode_aset'         => 'required|unique:aset,kode_aset,' . $aset->id . ',id',
+            'nama_aset'         => 'required',
+            'kategori_id'       => 'required|exists:kategori_aset,kategori_id', // Validasi baru
             'tanggal_perolehan' => 'required|date',
-            'nilai_perolehan' => 'required|numeric',
-            'kondisi' => 'required|in:Baik,Rusak Ringan,Rusak Berat',
-            'lokasi' => 'required',
-            'penanggung_jawab' => 'required'
+            'nilai_perolehan'   => 'required|numeric',
+            'kondisi'           => 'required|in:Baik,Rusak Ringan,Rusak Berat',
+            'lokasi'            => 'required',
+            'penanggung_jawab'  => 'required',
         ]);
 
         $aset->update($request->all());

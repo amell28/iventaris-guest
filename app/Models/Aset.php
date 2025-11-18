@@ -1,13 +1,13 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Aset extends Model
 {
-     use HasFactory;
+    use HasFactory;
     /**
      * The attributes that are mass assignable.
      *
@@ -19,13 +19,13 @@ class Aset extends Model
     protected $fillable = [
         'kode_aset',
         'nama_aset',
-        'kategori_id',      // <-- PERBAIKAN 1: Ganti 'kategori' menjadi 'kategori_id'
+        'kategori_id', // <-- PERBAIKAN 1: Ganti 'kategori' menjadi 'kategori_id'
         'tanggal_perolehan',
-        'nilai_perolehan',  // <-- PERBAIKAN 2: Pastikan ini ada (sudah ada di file Anda)
+        'nilai_perolehan', // <-- PERBAIKAN 2: Pastikan ini ada (sudah ada di file Anda)
         'kondisi',
         'lokasi',
         'penanggung_jawab',
-        'keterangan'
+        'keterangan',
     ];
 
     /**
@@ -35,7 +35,7 @@ class Aset extends Model
      */
     protected $casts = [
         'tanggal_perolehan' => 'date',
-        'nilai_perolehan' => 'decimal:2'
+        'nilai_perolehan'   => 'decimal:2',
     ];
 
     /**
@@ -44,5 +44,23 @@ class Aset extends Model
     public function kategoriAset()
     {
         return $this->belongsTo(kategoriAset::class, 'kategori_id', 'kategori_id');
+    }
+
+    public function scopeFilter(Builder $query, $request, array $filterableColumns = [])
+    {
+        // Filter berdasarkan kondisi
+        if ($request->filled('kondisi')) {
+            $query->where('kondisi', $request->kondisi);
+        }
+
+        // Search berdasarkan kode_aset atau nama_aset
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('kode_aset', 'like', '%' . $search . '%')
+                  ->orWhere('nama_aset', 'like', '%' . $search . '%');
+            });
+        }
+        return $query;
     }
 }

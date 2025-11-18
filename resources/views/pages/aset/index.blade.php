@@ -57,17 +57,39 @@
                 </div>
                 <div class="col-md-6">
                     <div class="search-box">
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <h5 class="mb-0">Cari Aset</h5>
+                        <form method="GET" action="{{ route('aset.index') }}">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <h5 class="mb-0">Cari Aset</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="search"
+                                            placeholder="Ketik Kode atau Nama Aset..." value="{{ request('search') }}">
+                                    
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Ketik Kode atau Nama Aset..."
-                                    id="searchInput">
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
+            </div>
+
+            <div class="table-responsive">
+                <form method="GET" action="{{ route('aset.index') }}" class="mb-3">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <select name="kondisi" class="form-select" onchange="this.form.submit()">
+                                <option value="">Semua Kondisi</option>
+                                <option value="Baik" {{ request('kondisi') == 'Baik' ? 'selected' : '' }}>Baik</option>
+                                <option value="Rusak Ringan" {{ request('kondisi') == 'Rusak Ringan' ? 'selected' : '' }}>
+                                    Rusak Ringan</option>
+                                <option value="Rusak Berat" {{ request('kondisi') == 'Rusak Berat' ? 'selected' : '' }}>
+                                    Rusak Berat</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
             </div>
 
             <div class="row" id="asetContainer">
@@ -191,6 +213,10 @@
                         </div>
                     </div>
                 @endforelse
+            </div>
+
+            <div class="mt-3">
+                {{ $aset->links('pagination::bootstrap-5') }}
             </div>
         </div>
     </section>
