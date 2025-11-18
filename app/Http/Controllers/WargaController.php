@@ -9,10 +9,14 @@ class WargaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-         $dataWarga = Warga::all();
-    return view('pages.warga.index', compact('dataWarga'));
+        $filterableColumns = ['jenis_kelamin'];
+
+        $dataWarga = Warga::filter($request, $filterableColumns)
+        ->paginate(5)
+        ->withQueryString();
+        return view('pages.warga.index', compact('dataWarga'));
 
     }
 
@@ -29,13 +33,13 @@ class WargaController extends Controller
      */
     public function store(Request $request)
     {
-        $data['no_ktp'] = $request->no_ktp;
-        $data['nama'] = $request->nama;
+        $data['no_ktp']        = $request->no_ktp;
+        $data['nama']          = $request->nama;
         $data['jenis_kelamin'] = $request->jenis_kelamin;
-        $data['agama'] = $request->agama;
-        $data['pekerjaan'] = $request->pekerjaan;
-        $data['telp'] = $request->telp;
-        $data['email'] = $request->email;
+        $data['agama']         = $request->agama;
+        $data['pekerjaan']     = $request->pekerjaan;
+        $data['telp']          = $request->telp;
+        $data['email']         = $request->email;
 
         Warga::create($data);
 
@@ -65,15 +69,15 @@ class WargaController extends Controller
     public function update(Request $request, string $id)
     {
         $warga_id = $id;
-        $warga = Warga::findOrFail($warga_id);
+        $warga    = Warga::findOrFail($warga_id);
 
-        $warga->no_ktp = $request->no_ktp;
-        $warga->nama = $request->nama;
+        $warga->no_ktp        = $request->no_ktp;
+        $warga->nama          = $request->nama;
         $warga->jenis_kelamin = $request->jenis_kelamin;
-        $warga->agama = $request->agama;
-        $warga->pekerjaan = $request->pekerjaan;
-        $warga->telp = $request->telp;
-        $warga->email = $request->email;
+        $warga->agama         = $request->agama;
+        $warga->pekerjaan     = $request->pekerjaan;
+        $warga->telp          = $request->telp;
+        $warga->email         = $request->email;
 
         $warga->save();
 

@@ -53,14 +53,14 @@
             <div class="row mb-4 align-items-center">
                 <div class="col-md-6">
                     <a href="{{ route('warga.create') }}" class="main-btn btn-hover btn-sm">
-                        <i class="fas fa-plus me-1"></i>Tambah Data Aset
+                        <i class="fas fa-plus me-1"></i>Tambah Data Warga
                     </a>
                 </div>
                 <div class="col-md-6">
                     <div class="search-box">
                         <div class="row align-items-center">
                             <div class="col-md-6">
-                                <h5 class="mb-0">Cari Kategori Aset</h5>
+                                <h5 class="mb-0">Cari Warga</h5>
                             </div>
                             <div class="col-md-6">
                                 <input type="text" class="form-control" placeholder="Ketik nama atau NIK anda..."
@@ -68,6 +68,23 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="table-responsive">
+                    <form method="GET" action="{{ route('warga.index') }}"
+                        class="mb-3">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <select name="jenis_kelamin" class="form-select" onchange="this.form.submit()">
+                                    <option value="">All</option>
+                                    <option value="Laki-Laki" {{ request('jenis_kelamin') == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
+                                    <option value="Perempuan" {{ request('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
 
@@ -176,6 +193,9 @@
                         </div>
                     </div>
                 @endforelse
+            </div>
+            <div class="mt-3">
+                {{ $dataWarga->links('pagination::bootstrap-5') }}
             </div>
         </div>
     </section>
