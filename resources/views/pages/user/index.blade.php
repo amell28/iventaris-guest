@@ -30,7 +30,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="stats-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                        <div class="stats-number">{{ $dataUser->where('created_at', '>=', now()->subMonth())->count() }}</div>
+                        <div class="stats-number">{{ $dataUser->where('created_at', '>=', now()->subMonth())->count() }}
+                        </div>
                         <div class="stats-label">User Baru (30 Hari)</div>
                     </div>
                 </div>
@@ -56,18 +57,39 @@
                 </div>
                 <div class="col-md-6">
                     <div class="search-box">
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <h5 class="mb-0">Cari User</h5>
+                        <form method="GET" action="{{ route('user.index') }}">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <h5 class="mb-0">Cari User</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="search"
+                                            placeholder="Ketik nama atau email..." value="{{ request('search') }}">
+                                        
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                {{-- Placeholder disesuaikan --}}
-                                <input type="text" class="form-control" placeholder="Ketik nama atau email..."
-                                    id="searchInput">
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
+            </div>
+
+            <div class="table-responsive">
+                <form method="GET" action="{{ route('user.index') }}" class="mb-3">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <select name="email_verified_at" class="form-select" onchange="this.form.submit()">
+                                <option value="">Semua Status</option>
+                                <option value="verified" {{ request('email_verified_at') == 'verified' ? 'selected' : '' }}>
+                                    Email Terverifikasi</option>
+                                <option value="unverified"
+                                    {{ request('email_verified_at') == 'unverified' ? 'selected' : '' }}>Email Belum
+                                    Verifikasi</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
             </div>
 
             <div class="row" id="userContainer">
@@ -102,7 +124,8 @@
                                     </div>
                                     <div class="info-content">
                                         <strong>Status Email</strong><br>
-                                        <span class="fw-bold {{ $user->email_verified_at ? 'text-success' : 'text-warning' }}">
+                                        <span
+                                            class="fw-bold {{ $user->email_verified_at ? 'text-success' : 'text-warning' }}">
                                             {{ $user->email_verified_at ? 'Terverifikasi' : 'Belum Verifikasi' }}
                                         </span>
                                     </div>
@@ -161,30 +184,34 @@
                     </div>
                 @endforelse
             </div>
+            <div class="mt-3">
+                {{ $dataUser->links('pagination::bootstrap-5') }}
+            </div>
         </div>
     </section>
     {{-- end main content --}}
 
     {{-- Penambahan script search dari template user --}}
     @push('scripts')
-    <script>
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const userItems = document.querySelectorAll('.user-item'); // user-item adalah class di card loop
+        <script>
+            // Search functionality
+            document.getElementById('searchInput').addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const userItems = document.querySelectorAll('.user-item'); // user-item adalah class di card loop
 
-            userItems.forEach(item => {
-                // Selector disesuaikan untuk mengambil Nama (h5) dan Email (p) di dalam .warga-header
-                const userName = item.querySelector('.warga-header h5').textContent.toLowerCase();
-                const userEmail = item.querySelector('.warga-header p').textContent.toLowerCase(); // Mengandung "Email: [email]"
+                userItems.forEach(item => {
+                    // Selector disesuaikan untuk mengambil Nama (h5) dan Email (p) di dalam .warga-header
+                    const userName = item.querySelector('.warga-header h5').textContent.toLowerCase();
+                    const userEmail = item.querySelector('.warga-header p').textContent
+                        .toLowerCase(); // Mengandung "Email: [email]"
 
-                if (userName.includes(searchTerm) || userEmail.includes(searchTerm)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
+                    if (userName.includes(searchTerm) || userEmail.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
             });
-        });
-    </script>
+        </script>
     @endpush
 @endsection
