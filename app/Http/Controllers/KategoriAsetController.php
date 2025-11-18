@@ -36,7 +36,7 @@ class KategoriAsetController extends Controller
             'deskripsi' => 'nullable|string'
         ]);
 
-        KategoriAset::create($request->all());
+        kategoriAset::create($request->all());
 
         return redirect()->route('kategoriAset.index')
                         ->with('success', 'Kategori aset berhasil ditambahkan!');
