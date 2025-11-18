@@ -3,7 +3,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KategoriAset;
+use App\Models\kategoriAset;
 use Illuminate\Http\Request;
 
 class KategoriAsetController extends Controller
@@ -13,7 +13,7 @@ class KategoriAsetController extends Controller
      */
     public function index()
     {
-        $kategoriAset = KategoriAset::orderBy('nama')->get();
+        $kategoriAset = kategoriAset::orderBy('nama')->get();
         return view('pages.kategoriAset.index', compact('kategoriAset'));
     }
 
@@ -45,7 +45,7 @@ class KategoriAsetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(KategoriAset $kategoriAset)
+    public function show(kategoriAset $kategoriAset)
     {
         return view('pages.kategoriAset.show', compact('kategoriAset'));
     }
@@ -53,7 +53,7 @@ class KategoriAsetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(KategoriAset $kategoriAset)
+    public function edit(kategoriAset $kategoriAset)
     {
         return view('pages.kategoriAset.edit', compact('kategoriAset'));
     }
@@ -61,7 +61,7 @@ class KategoriAsetController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, KategoriAset $kategoriAset)
+    public function update(Request $request, kategoriAset $kategoriAset)
     {
         $request->validate([
             'nama' => 'required|string|max:255',

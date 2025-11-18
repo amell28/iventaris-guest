@@ -22,7 +22,7 @@ class AsetController extends Controller
      */
     public function create()
     {
-         $kategoriAset = KategoriAset::all(); // Ambil semua kategori
+         $kategoriAset = kategoriAset::all(); // Ambil semua kategori
         return view('pages.aset.create', compact('kategoriAset'));
     }
 
@@ -61,7 +61,7 @@ class AsetController extends Controller
      */
     public function edit(Aset $aset)
     {
-         $kategoriAset = KategoriAset::all(); // Ambil semua kategori
+         $kategoriAset = kategoriAset::all(); // Ambil semua kategori
         return view('pages.aset.edit', compact('aset', 'kategoriAset'));
     }
 

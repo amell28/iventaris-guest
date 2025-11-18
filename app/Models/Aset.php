@@ -43,6 +43,6 @@ class Aset extends Model
      */
     public function kategoriAset()
     {
-        return $this->belongsTo(KategoriAset::class, 'kategori_id', 'kategori_id');
+        return $this->belongsTo(kategoriAset::class, 'kategori_id', 'kategori_id');
     }
 }
