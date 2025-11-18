@@ -14,7 +14,6 @@ class kategoriAset extends Model
     protected $fillable = ['nama', 'kode', 'deskripsi'];
 
     protected $table = 'kategori_aset';
-    
 
     // Relasi dengan aset (jika nanti ada tabel aset)
     public function asets()
