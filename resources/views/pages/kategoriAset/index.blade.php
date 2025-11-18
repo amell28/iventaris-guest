@@ -44,7 +44,8 @@
                 <div class="col-md-3">
                     <div class="stats-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
                         {{-- Contoh: Statistik Keempat (Created Bulan Ini) --}}
-                        <div class="stats-number">{{ $kategoriAset->where('created_at', '>=', now()->subMonth())->count() }}</div>
+                        <div class="stats-number">{{ $kategoriAset->where('created_at', '>=', now()->subMonth())->count() }}
+                        </div>
                         <div class="stats-label">Baru Bulan Ini</div>
                     </div>
                 </div>
@@ -58,17 +59,38 @@
                 </div>
                 <div class="col-md-6">
                     <div class="search-box">
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <h5 class="mb-0">Cari Kategori Aset</h5>
+                        <form method="GET" action="{{ route('kategoriAset.index') }}">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <h5 class="mb-0">Cari Kategori Aset</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="search"
+                                            placeholder="Ketik nama atau kode..." value="{{ request('search') }}">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control"
-                                        placeholder="Ketik nama atau kode..." id="searchInput">
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
+            </div>
+
+            <div class="table-responsive">
+                <form method="GET" action="{{ route('kategoriAset.index') }}" class="mb-3">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <select name="deskripsi_filter" class="form-select" onchange="this.form.submit()">
+                                <option value="">Semua Deskripsi</option>
+                                <option value="ada" {{ request('deskripsi_filter') == 'ada' ? 'selected' : '' }}>Ada
+                                    Deskripsi</option>
+                                <option value="tidak_ada"
+                                    {{ request('deskripsi_filter') == 'tidak_ada' ? 'selected' : '' }}>Tidak Ada Deskripsi
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
             </div>
 
             <div class="row" id="kategoriContainer">
@@ -80,7 +102,9 @@
                                     <i class="lni lni-layers"></i> {{-- Icon Kategori --}}
                                 </div>
                                 <h5 class="mb-1 text-truncate">{{ $kategori->nama }}</h5>
-                                <p class="mb-0 opacity-75">Kode: <strong class="text-primary">{{ $kategori->kode }}</strong></p>
+                                <p class="mb-0 opacity-75">Kode: <strong
+                                        class="text-primary">{{ $kategori->kode }}</strong>
+                                </p>
                             </div>
 
                             <div class="warga-info">
@@ -153,30 +177,33 @@
                     </div>
                 @endforelse
             </div>
+            <div class="mt-3">
+                {{ $kategoriAset->links('pagination::bootstrap-5') }}
+            </div>
         </div>
     </section>
     {{-- end main content --}}
 
     @push('scripts')
-    <script>
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const kategoriItems = document.querySelectorAll('.kategori-item');
+        <script>
+            // Search functionality
+            document.getElementById('searchInput').addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const kategoriItems = document.querySelectorAll('.kategori-item');
 
-            kategoriItems.forEach(item => {
-                // Mencari di nama dan kode
-                const kategoriNama = item.querySelector('.warga-header h5').textContent.toLowerCase();
-                // Ambil kode dari elemen <p>
-                const kategoriKode = item.querySelector('.warga-header p').textContent.toLowerCase();
+                kategoriItems.forEach(item => {
+                    // Mencari di nama dan kode
+                    const kategoriNama = item.querySelector('.warga-header h5').textContent.toLowerCase();
+                    // Ambil kode dari elemen <p>
+                    const kategoriKode = item.querySelector('.warga-header p').textContent.toLowerCase();
 
-                if (kategoriNama.includes(searchTerm) || kategoriKode.includes(searchTerm)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
+                    if (kategoriNama.includes(searchTerm) || kategoriKode.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
             });
-        });
-    </script>
+        </script>
     @endpush
 @endsection

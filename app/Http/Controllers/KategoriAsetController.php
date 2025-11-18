@@ -11,9 +11,13 @@ class KategoriAsetController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kategoriAset = kategoriAset::orderBy('nama')->get();
+        $filterableColumns = ['deskripsi'];
+
+        $kategoriAset = kategoriAset::filter($request, $filterableColumns)
+        ->orderBy('nama')
+        ->paginate(5);
         return view('pages.kategoriAset.index', compact('kategoriAset'));
     }
 
