@@ -11,8 +11,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+
+        // 🔥 REGISTER MIDDLEWARE CUSTOM
+        $middleware->alias([
+            'auth.custom' => \App\Http\Middleware\AuthCheck::class,   // <-- wajib
+            'role'        => \App\Http\Middleware\RoleMiddleware::class,
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
-    })->create();
+    })
+    ->create();

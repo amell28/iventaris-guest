@@ -6,129 +6,118 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\View\View;
-use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
     /**
-     * Menampilkan halaman login
+     * Halaman Login
      */
-    public function index(): View
+    public function index()
     {
         return view('pages.auth.login-form');
     }
 
     /**
-     * Menampilkan halaman register
+     * Halaman Register
      */
-    public function showRegister(): View
+    public function showRegister()
     {
         return view('pages.auth.register');
     }
 
     /**
-     * Memproses form login
+     * Proses Login
      */
     public function login(Request $request)
     {
-        try {
-            // Validasi input dengan custom messages bahasa Indonesia
-            $validator = Validator::make($request->all(), [
-                'email' => 'required|email|max:255',
-                'password' => 'required|min:3'
-            ], [
-                'email.required' => 'Email tidak boleh kosong',
-                'email.email' => 'Format email tidak valid',
-                'email.max' => 'Email maksimal 255 karakter',
-                'password.required' => 'Password tidak boleh kosong',
-                'password.min' => 'Password minimal 3 karakter'
-            ]);
+        // VALIDASI LOGIN
+        $validator = Validator::make($request->all(), [
+            'email'    => 'required|email|max:255',
+            'password' => 'required|min:3',
+        ], [
+            'email.required' => 'Email tidak boleh kosong',
+            'email.email'    => 'Format email tidak valid',
+            'password.required' => 'Password tidak boleh kosong',
+            'password.min'      => 'Password minimal 3 karakter',
+        ]);
 
-            // Cek validasi
-            if ($validator->fails()) {
-                return redirect('/auth')
-                    ->withErrors($validator)
-                    ->withInput();
-            }
-
-            $email = $request->email;
-            $password = $request->password;
-
-            // Cek apakah email ada di database
-            $users = User::where('email', $email)->first();
-
-            if (!$users) {
-                return redirect('/auth')
-                    ->withErrors(['email' => 'Email tidak terdaftar'])
-                    ->withInput();
-            }
-
-            // Cek password menggunakan Hash::check
-            if (!Hash::check($password, $users->password)) {
-                return redirect('/auth')
-                    ->withErrors(['password' => 'Password salah'])
-                    ->withInput();
-            }
-
-            // Login berhasil - tampilkan dashboard
-            return view('pages.dashboard', [
-                'user' => $users,
-                'success' => 'Login berhasil! Selamat datang di sistem inventaris.'
-            ]);
-
-        } catch (QueryException $e) {
-            // Handle database errors
-            return redirect('/auth')
-                ->withErrors(['database' => 'Terjadi kesalahan sistem. Silakan coba lagi.'])
-                ->withInput();
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
         }
+
+        //  CEK USER
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return back()->withErrors(['email' => 'Email tidak terdaftar'])->withInput();
+        }
+
+        //  CEK PASSWORD
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->withErrors(['password' => 'Password salah'])->withInput();
+        }
+
+        //  UPDATE WAKTU LOGIN TERAKHIR
+        $user->update([
+            'login_at' => now()
+        ]);
+
+        //  SIMPAN SESSION LOGIN
+        Session::put('login', true);
+        Session::put('user_id', $user->id);
+        Session::put('user_name', $user->name);
+        Session::put('user_role', $user->role);
+        Session::put('user_photo', $user->profile_photo);
+
+        return redirect()->route('dashboard')->with('success', 'Login berhasil!');
     }
 
     /**
-     * Memproses form register
+     * Proses Register
      */
     public function register(Request $request)
     {
-        // try {
-            // Validasi input register
-            $validator = Validator::make($request->all(), [
-                'name' => 'required|max:255',
-                'email' => 'required|email|max:255|unique:user',
-                'password' => 'required|min:3|confirmed',
-                'password_confirmation' => 'required'
-            ], [
-                'name.required' => 'Nama lengkap tidak boleh kosong',
-                'name.max' => 'Nama maksimal 255 karakter',
-                'email.required' => 'Email tidak boleh kosong',
-                'email.email' => 'Format email tidak valid',
-                'email.max' => 'Email maksimal 255 karakter',
-                'email.unique' => 'Email sudah terdaftar',
-                'password.required' => 'Password tidak boleh kosong',
-                'password.min' => 'Password minimal 3 karakter',
-                'password.confirmed' => 'Konfirmasi password tidak sesuai',
-                'password_confirmation.required' => 'Konfirmasi password tidak boleh kosong'
-            ]);
+        //  VALIDASI REGISTER
+        $validator = Validator::make($request->all(), [
+            'name'                  => 'required|max:255',
+            'email'                 => 'required|email|max:255|unique:users,email',
+            'role'                  => 'required|in:admin,petugas,user',
+            'password'              => 'required|min:3|confirmed',
+            'password_confirmation' => 'required',
+            'profile_photo'         => 'nullable|image|max:2048',
+        ], [
+            'name.required' => 'Nama lengkap tidak boleh kosong',
+            'email.required' => 'Email tidak boleh kosong',
+            'email.unique' => 'Email sudah terdaftar',
+            'role.required' => 'Role wajib dipilih',
+            'password.required' => 'Password tidak boleh kosong',
+            'password.confirmed' => 'Konfirmasi password tidak sesuai',
+            'profile_photo.image' => 'File harus berupa gambar',
+        ]);
 
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
 
+        //  SIMPAN FOTO PROFIL (opsional)
+        $photoPath = null;
 
-            // Buat user baru
-            $User = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
+        if ($request->hasFile('profile_photo')) {
+            $photoPath = $request->file('profile_photo')->store('profile', 'public');
+        }
 
-            // Redirect ke halaman login dengan pesan sukses
-            return redirect('/auth')
-                ->with('success', 'Registrasi berhasil! Silakan login dengan akun Anda.');
+        //  SIMPAN USER BARU
+        User::create([
+            'name'          => $request->name,
+            'email'         => $request->email,
+            'role'          => $request->role,
+            'password'      => Hash::make($request->password),
+            'profile_photo' => $photoPath,
+        ]);
 
-        // } catch (QueryException $e) {
-        //     // Handle database errors
-        //     return redirect('/auth/register')
-        //         ->withErrors(['database' => 'Terjadi kesalahan sistem. Silakan coba lagi.'])
-        //         ->withInput();
-        // }
+        return redirect('/auth')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
     /**
@@ -136,7 +125,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        return redirect('/auth')
-            ->with('success', 'Anda telah logout dari sistem.');
+        Session::flush();
+        return redirect('/auth')->with('success', 'Anda berhasil logout.');
     }
 }

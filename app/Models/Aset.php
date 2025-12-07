@@ -1,66 +1,65 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Aset extends Model
 {
     use HasFactory;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
 
-    protected $table = 'aset'; // Pastikan ini 'aset'
+    protected $table = 'aset';
+
+    /** PRIMARY KEY SESUAI MIGRATION */
+    protected $primaryKey = 'aset_id';
+    public $incrementing  = true;
+    protected $keyType    = 'int';
 
     protected $fillable = [
         'kode_aset',
         'nama_aset',
-        'kategori_id', // <-- PERBAIKAN 1: Ganti 'kategori' menjadi 'kategori_id'
-        'tanggal_perolehan',
-        'nilai_perolehan', // <-- PERBAIKAN 2: Pastikan ini ada (sudah ada di file Anda)
+        'kategori_id',
+        'tanggal_perolehan', // ← WAJIB ADA!
+        'nilai_perolehan',
         'kondisi',
         'lokasi',
         'penanggung_jawab',
         'keterangan',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected $casts = [
         'tanggal_perolehan' => 'date',
         'nilai_perolehan'   => 'decimal:2',
     ];
 
-    /**
-     * Relasi ke model KategoriAset
-     */
+    /** RELASI KE KATEGORI */
     public function kategoriAset()
     {
-        return $this->belongsTo(kategoriAset::class, 'kategori_id', 'kategori_id');
+        return $this->belongsTo(KategoriAset::class, 'kategori_id', 'kategori_id');
     }
 
-    public function scopeFilter(Builder $query, $request, array $filterableColumns = [])
+    /** FILTER SEARCH */
+    public function scopeFilter($query, $request)
     {
-        // Filter berdasarkan kondisi
         if ($request->filled('kondisi')) {
             $query->where('kondisi', $request->kondisi);
         }
 
-        // Search berdasarkan kode_aset atau nama_aset
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('kode_aset', 'like', '%' . $search . '%')
-                  ->orWhere('nama_aset', 'like', '%' . $search . '%');
+            $query->where(function ($q) use ($search) {
+                $q->where('kode_aset', 'like', "%$search%")
+                    ->orWhere('nama_aset', 'like', "%$search%");
             });
         }
+
         return $query;
+    }
+
+    public function media()
+    {
+        return $this->hasMany(Media::class, 'ref_id', 'aset_id')
+            ->where('ref_table', 'aset')
+            ->orderBy('sort_order');
     }
 }

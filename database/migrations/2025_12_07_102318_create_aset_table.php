@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('aset', function (Blueprint $table) {
-            $table->id();
+            $table->id('aset_id');
+            $table->unsignedBigInteger('kategori_id'); // FK kategori
             $table->string('kode_aset')->unique();
             $table->string('nama_aset');
-            $table->string('kategori');
             $table->date('tanggal_perolehan');
             $table->decimal('nilai_perolehan', 15, 2);
             $table->enum('kondisi', ['Baik', 'Rusak Ringan', 'Rusak Berat']);
@@ -23,6 +23,13 @@ return new class extends Migration
             $table->string('penanggung_jawab');
             $table->text('keterangan')->nullable();
             $table->timestamps();
+
+            // Foreign key menuju kategori_aset
+            $table->foreign('kategori_id')->references('kategori_id')->on('kategori_aset');
+
+            // === RELASI MEDIA (NO FK needed) ===
+            // Media memakai ref_table='aset' dan ref_id=aset_id
+            // sehingga kolom baru TIDAK diperlukan di tabel aset.
         });
     }
 

@@ -31,7 +31,7 @@
     <!-- preloader end -->
 
     <!-- ========================= header start ========================= -->
-    @include('layouts.guest.haeder')
+    @include('layouts.guest.header')
     <!-- ========================= header end ========================= -->
 
     <!-- Start Main Content -->

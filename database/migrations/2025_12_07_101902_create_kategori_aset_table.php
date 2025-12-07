@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::create('kategori_aset', function (Blueprint $table) {
-            $table->id('kategori_id'); // PK
+        Schema::create('kategori_aset', function (Blueprint $table) {
+            $table->id('kategori_id'); // Primary Key
             $table->string('nama', 255);
-            $table->string('kode', 50)->unique(); // UNQ
+            $table->string('kode', 50)->unique(); // kode kategori unik
             $table->text('deskripsi')->nullable();
             $table->timestamps();
         });

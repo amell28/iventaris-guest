@@ -2,37 +2,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aset;
-use App\Models\kategoriAset;
+use App\Models\KategoriAset;
+use App\Models\Media;
 use Illuminate\Http\Request;
 
 class AsetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
-        $filterableColumns = ['kondisi'];
-        $aset              = Aset::with('kategoriAset')
-            ->filter($request) // Gunakan scope filter
-            ->latest()
-            ->paginate(5);
+        $aset = Aset::with(['kategoriAset', 'media'])
+            ->latest('aset_id')
+            ->paginate(6);
 
         return view('pages.aset.index', compact('aset'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        $kategoriAset = kategoriAset::all(); // Ambil semua kategori
+        $kategoriAset = KategoriAset::all();
         return view('pages.aset.create', compact('kategoriAset'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -44,57 +34,103 @@ class AsetController extends Controller
             'kondisi'           => 'required|in:Baik,Rusak Ringan,Rusak Berat',
             'lokasi'            => 'required',
             'penanggung_jawab'  => 'required',
+            'media_file'        => 'nullable|image|max:2048',
         ]);
 
-        Aset::create($request->all());
+        // ⬅️ SIMPAN DATA ASET DAN GET ASSET ID
+        $aset = Aset::create([
+            'kode_aset'         => $request->kode_aset,
+            'nama_aset'         => $request->nama_aset,
+            'kategori_id'       => $request->kategori_id,
+            'tanggal_perolehan' => $request->tanggal_perolehan,
+            'nilai_perolehan'   => $request->nilai_perolehan,
+            'kondisi'           => $request->kondisi,
+            'lokasi'            => $request->lokasi,
+            'penanggung_jawab'  => $request->penanggung_jawab,
+            'keterangan'        => $request->keterangan,
+        ]);
+
+        // ========== SIMPAN FOTO ==========
+        if ($request->hasFile('media_file')) {
+            $path = $request->file('media_file')->store('aset', 'public');
+
+            Media::create([
+                'ref_table'  => 'aset',
+                'ref_id'     => $aset->aset_id, // ← sekarang TIDAK ERROR
+                'file_url'   => $path,
+                'caption'    => 'Foto Aset',
+                'mime_type'  => $request->file('media_file')->getMimeType(),
+                'sort_order' => 1,
+            ]);
+        }
 
         return redirect()->route('aset.index')
             ->with('success', 'Data aset berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Aset $aset)
-    {
-        return view('aset.show', compact('aset'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Aset $aset)
     {
-        $kategoriAset = kategoriAset::all(); // Ambil semua kategori
+        $kategoriAset = KategoriAset::all();
         return view('pages.aset.edit', compact('aset', 'kategoriAset'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Aset $aset)
     {
         $request->validate([
-            'kode_aset'         => 'required|unique:aset,kode_aset,' . $aset->id . ',id',
+            'kode_aset'         => 'required|unique:aset,kode_aset,' . $aset->aset_id . ',aset_id',
             'nama_aset'         => 'required',
-            'kategori_id'       => 'required|exists:kategori_aset,kategori_id', // Validasi baru
+            'kategori_id'       => 'required|exists:kategori_aset,kategori_id',
             'tanggal_perolehan' => 'required|date',
             'nilai_perolehan'   => 'required|numeric',
             'kondisi'           => 'required|in:Baik,Rusak Ringan,Rusak Berat',
             'lokasi'            => 'required',
             'penanggung_jawab'  => 'required',
+            'media_file'        => 'nullable|image|max:2048',
         ]);
 
-        $aset->update($request->all());
-        return redirect()->route('aset.index')->with('success', 'Data aset berhasil diperbarui!');
+        $aset->update([
+            'kode_aset'         => $request->kode_aset,
+            'nama_aset'         => $request->nama_aset,
+            'kategori_id'       => $request->kategori_id,
+            'tanggal_perolehan' => $request->tanggal_perolehan,
+            'nilai_perolehan'   => $request->nilai_perolehan,
+            'kondisi'           => $request->kondisi,
+            'lokasi'            => $request->lokasi,
+            'penanggung_jawab'  => $request->penanggung_jawab,
+            'keterangan'        => $request->keterangan,
+        ]);
+
+        // ========== UPDATE FOTO ==========
+        if ($request->hasFile('media_file')) {
+            $path = $request->file('media_file')->store('aset', 'public');
+
+            Media::updateOrCreate(
+                [
+                    'ref_table' => 'aset',
+                    'ref_id'    => $aset->aset_id,
+                ],
+                [
+                    'file_url'   => $path,
+                    'caption'    => 'Foto Aset',
+                    'mime_type'  => $request->file('media_file')->getMimeType(),
+                    'sort_order' => 1,
+                ]
+            );
+        }
+
+        return redirect()->route('aset.index')
+            ->with('success', 'Data aset berhasil diperbarui!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Aset $aset)
     {
+        Media::where('ref_table', 'aset')
+            ->where('ref_id', $aset->aset_id)
+            ->delete();
+
         $aset->delete();
-        return redirect()->route('aset.index')->with('success', 'Data aset berhasil dihapus!');
+
+        return redirect()->route('aset.index')
+            ->with('success', 'Data aset berhasil dihapus!');
     }
 }
