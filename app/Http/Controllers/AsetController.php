@@ -12,7 +12,7 @@ class AsetController extends Controller
     {
         $aset = Aset::with(['kategoriAset', 'media'])
             ->latest('aset_id')
-            ->paginate(6);
+            ->paginate(10);
 
         return view('pages.aset.index', compact('aset'));
     }

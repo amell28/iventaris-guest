@@ -7,7 +7,7 @@
                          <a href="{{ route('dashboard') }}"> <img src="{{ asset('assets-guest/images/logo/unnamed.png') }}"
                                  alt="logo" height="80" class="me-2"> </a>
                      </div>
-                     <p class="desc">Sistem Iventaris dan Aset.</p>
+
                  </div>
              </div>
              <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 offset-xl-1">

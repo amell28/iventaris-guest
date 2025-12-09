@@ -14,7 +14,7 @@ class LokasiAsetController extends Controller
     {
         $lokasiAset = LokasiAset::with(['aset', 'media'])
             ->latest('lokasi_id')
-            ->paginate(6);
+            ->paginate(10);
 
         return view('pages.lokasi-aset.index', compact('lokasiAset'));
     }

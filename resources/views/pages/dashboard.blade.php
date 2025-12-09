@@ -47,7 +47,7 @@
 
 							</ul>
 
-							<a href="#0" class="main-btn btn-hover border-btn mt-5">Lihat Demo Sistem</a>
+							<a href="{{ route('aset.index') }}" class="main-btn btn-hover border-btn mt-5"> Aset Sistem</a>
 						</div>
 					</div>
 				</div>

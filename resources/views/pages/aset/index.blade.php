@@ -112,7 +112,7 @@
                         <div class="warga-info">
 
                             <div class="info-item">
-                                <div class="info-icon"><i class="bi bi-tags-fill"></i></div>
+                                <div class="info-icon"><i class="lni ini-tags-fill"></i></div>
                                 <div class="info-content">
                                     <strong>Kategori</strong><br>
                                     {{ $item->kategoriAset->nama ?? '-' }}
@@ -120,7 +120,7 @@
                             </div>
 
                             <div class="info-item">
-                                <div class="info-icon"><i class="bi bi-currency-dollar"></i></div>
+                                <div class="info-icon"><i class="lni lni-currency-dollar"></i></div>
                                 <div class="info-content">
                                     <strong>Nilai Perolehan</strong><br>
                                     Rp {{ number_format($item->nilai_perolehan, 0, ',', '.') }}
@@ -128,7 +128,7 @@
                             </div>
 
                             <div class="info-item">
-                                <div class="info-icon"><i class="bi bi-calendar-event"></i></div>
+                                <div class="info-icon"><i class="lni lni-calendar"></i></div>
                                 <div class="info-content">
                                     <strong>Tanggal Perolehan</strong><br>
                                     {{ \Carbon\Carbon::parse($item->tanggal_perolehan)->format('d M Y') }}

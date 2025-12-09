@@ -118,7 +118,7 @@
                         <div class="warga-info">
 
                             <div class="info-item">
-                                <div class="info-icon"><i class="bi bi-map"></i></div>
+                                <div class="info-icon"><i class="lni lni-map"></i></div>
                                 <div class="info-content">
                                     <strong>Lokasi Text</strong><br>
                                     {{ $lokasi->lokasi_text ?? '-' }}
@@ -126,7 +126,9 @@
                             </div>
 
                             <div class="info-item">
-                                <div class="info-icon"><i class="bi bi-house"></i></div>
+                                <div class="info-icon">
+                                    <i class="lni lni-house"></i>
+                                </div>
                                 <div class="info-content">
                                     <strong>RT / RW</strong><br>
                                     RT {{ $lokasi->rt }} / RW {{ $lokasi->rw }}
@@ -134,7 +136,8 @@
                             </div>
 
                             <div class="info-item">
-                                <div class="info-icon"><i class="bi bi-card-text"></i></div>
+                                <div class="info-icon">
+                                    <i class="lni lni-card-text"></i></div>
                                 <div class="info-content">
                                     <strong>Keterangan</strong><br>
                                     {{ $lokasi->keterangan ?? '-' }}
@@ -143,7 +146,8 @@
 
                             {{-- FOTO / MEDIA --}}
                             <div class="info-item">
-                                <div class="info-icon"><i class="bi bi-image"></i></div>
+                                <div class="info-icon">
+                                    <i class="lni lni-image"></i></div>
                                 <div class="info-content">
                                     <strong>Foto / Denah</strong><br>
 

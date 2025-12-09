@@ -24,11 +24,7 @@ return new class extends Migration
             $table->string('rw')->nullable();
             $table->timestamps();
 
-            // ==== RELASI MEDIA (CATATAN) ====
-            // media.ref_table = 'lokasi_aset'
-            // media.ref_id    = lokasi_id
-            // Tidak perlu foreign key ke tabel media,
-            // karena media memakai sistem ref_table/ref_id.
+
         });
     }
 
