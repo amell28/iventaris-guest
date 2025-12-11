@@ -24,12 +24,9 @@ class AsetDummy extends Seeder
                 'kode_aset' => 'AST' . str_pad($i, 5, '0', STR_PAD_LEFT),
                 'nama_aset' => $kategori->nama . ' ' . $faker->word() . ' ' . $faker->randomElement(['A', 'B', 'C', 'X', 'Z']),
                 'kategori_id' => $kategori->kategori_id,
-                'tanggal_perolehan' => $faker->dateTimeBetween('-3 years', 'now'),
+                'tgl_perolehan' => $faker->dateTimeBetween('-3 years', 'now'),
                 'nilai_perolehan' => $faker->numberBetween(1000000, 100000000),
                 'kondisi' => $faker->randomElement(['Baik', 'Rusak Ringan', 'Rusak Berat']),
-                'lokasi' => $faker->randomElement(['Gedung A', 'Gedung B', 'Gedung C', 'Ruang Server', 'Laboratorium']),
-                'penanggung_jawab' => $faker->name(),
-                'keterangan' => $faker->optional()->sentence(6)
             ]);
         }
     }

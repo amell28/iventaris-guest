@@ -14,18 +14,18 @@ return new class extends Migration
         Schema::create('lokasi_aset', function (Blueprint $table) {
             $table->id('lokasi_id');
 
-            // Foreign key ke aset
-            $table->unsignedBigInteger('aset_id');
-            $table->foreign('aset_id')->references('aset_id')->on('aset')->onDelete('cascade');
+            $table->foreignId('aset_id')
+                  ->constrained('aset', 'aset_id')
+                  ->onDelete('cascade');
 
-            $table->string('keterangan')->nullable();
-            $table->text('lokasi_text')->nullable();
-            $table->string('rt')->nullable();
-            $table->string('rw')->nullable();
+            $table->string('lokasi_text');
+            $table->string('rt', 5);
+            $table->string('rw', 5);
+            $table->text('keterangan')->nullable();
+
             $table->timestamps();
-
-
         });
+
     }
 
     /**

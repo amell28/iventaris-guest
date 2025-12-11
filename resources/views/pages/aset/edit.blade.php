@@ -77,12 +77,6 @@
                                         </select>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label">Penanggung Jawab</label>
-                                        <input type="text" name="penanggung_jawab" class="form-control"
-                                               value="{{ old('penanggung_jawab', $aset->penanggung_jawab) }}" required>
-                                    </div>
-
                                 </div>
 
                                 {{-- KOLOM KANAN --}}
@@ -91,8 +85,8 @@
 
                                     <div class="mb-3">
                                         <label class="form-label">Tanggal Perolehan</label>
-                                        <input type="date" name="tanggal_perolehan" class="form-control"
-                                               value="{{ old('tanggal_perolehan', $aset->tanggal_perolehan) }}" required>
+                                        <input type="date" name="tgl_perolehan" class="form-control"
+                                               value="{{ old('tgl_perolehan', $aset->tgl_perolehan) }}" required>
                                     </div>
 
                                     <div class="mb-3">
@@ -108,19 +102,6 @@
                                             <option value="Rusak Ringan" {{ $aset->kondisi == 'Rusak Ringan' ? 'selected' : '' }}>Rusak Ringan</option>
                                             <option value="Rusak Berat" {{ $aset->kondisi == 'Rusak Berat' ? 'selected' : '' }}>Rusak Berat</option>
                                         </select>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label">Lokasi</label>
-                                        <input type="text" name="lokasi" class="form-control"
-                                               value="{{ old('lokasi', $aset->lokasi) }}" required>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label">Keterangan</label>
-                                        <textarea name="keterangan" class="form-control" rows="3">
-                                            {{ old('keterangan', $aset->keterangan) }}
-                                        </textarea>
                                     </div>
                                 </div>
 
@@ -139,7 +120,7 @@
 
                                 @if($foto)
                                     <p>Foto Lama:</p>
-                                    <img src="{{ asset('storage/' . $foto->file_url) }}"
+                                    <img src="{{ asset('storage/' . $foto->file_name) }}"
                                          style="height:150px; border-radius:10px; object-fit:cover;">
                                 @else
                                     <p class="text-muted">Belum ada foto.</p>

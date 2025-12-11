@@ -42,7 +42,6 @@
                         <h4>{{ $user->name }}</h4>
                         <p class="text-muted mb-1">{{ $user->email }}</p>
                         <p class="badge bg-primary">{{ strtoupper($user->role) }}</p>
-                        <p class="text-muted">Login: {{ $user->login_at ?? '-' }}</p>
                     </div>
 
                     <hr>

@@ -54,7 +54,7 @@
             <div class="row mb-4 align-items-center">
                 <div class="col-md-6">
                     <a href="{{ route('kategoriAset.create') }}" class="main-btn btn-hover btn-sm">
-                        <i class="fas fa-plus me-1"></i>Tambah Data Aset
+                        <i class="fas fa-plus me-1"></i>Tambah Kategori Aset
                     </a>
                 </div>
                 <div class="col-md-6">

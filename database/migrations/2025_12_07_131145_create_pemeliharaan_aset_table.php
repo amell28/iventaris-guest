@@ -9,18 +9,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pemeliharaan_aset', function (Blueprint $table) {
-            $table->bigIncrements('pemeliharaan_id');
-            $table->unsignedBigInteger('aset_id');
+            $table->id('pemeliharaan_id');
+
+            $table->foreignId('aset_id')
+                ->constrained('aset', 'aset_id')
+                ->onDelete('cascade');
+
             $table->date('tanggal');
-            $table->string('tindakan');
-            $table->decimal('biaya', 15, 2)->default(0);
-            $table->string('pelaksana')->nullable();
+            $table->text('tindakan');
+            $table->decimal('biaya', 15, 2);
+            $table->string('pelaksana');
             $table->timestamps();
 
-            $table->foreign('aset_id')
-                  ->references('aset_id')
-                  ->on('aset')
-                  ->onDelete('cascade');
         });
     }
 

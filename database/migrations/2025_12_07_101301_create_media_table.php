@@ -12,13 +12,13 @@ return new class extends Migration
             $table->id('media_id');
 
             // Nama tabel yang direferensikan (aset, lokasi_aset, pemeliharaan_aset, dsb)
-            $table->string('ref_table');
+            $table->string('ref_table', 50)->nullable();
 
             // ID data pada tabel tersebut
-            $table->unsignedBigInteger('ref_id');
+            $table->integer('ref_id')->nullable();
 
             // Lokasi file dalam storage/public
-            $table->string('file_url');
+            $table->string('file_name');
 
             // Optional caption deskripsi foto
             $table->string('caption')->nullable();

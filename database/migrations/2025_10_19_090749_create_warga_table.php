@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::create('warga', function (Blueprint $table) {
-            $table->id('warga_id');
-            $table->string('no_ktp', 16)->unique();
-            $table->string('nama', 100);
+        Schema::create('warga', function (Blueprint $table) {
+            $table->id('warga_id');                 // Primary Key: warga_id
+            $table->string('no_ktp', 16)->unique(); // Unique: no_ktp
+            $table->string('nama');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->enum('agama', ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu']);
-            $table->string('pekerjaan', 50)->nullable();
-            $table->string('telp', 15)->nullable();
-            $table->string('email', 100)->nullable();
+            $table->string('pekerjaan');
+            $table->string('telp', 15)->nullable();        // Boleh kosong
+            $table->string('email')->unique()->nullable(); // Boleh kosong dan harus unik
             $table->timestamps();
         });
     }

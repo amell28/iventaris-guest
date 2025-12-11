@@ -26,7 +26,7 @@
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard') }}"
                                         class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
-                                        Dashboard
+                                        Tentang
                                     </a>
                                 </li>
 
@@ -105,9 +105,6 @@
                                             <li class="dropdown-header">
                                                 <strong>{{ session('user_name') }}</strong><br>
                                                 <small>Role: {{ session('user_role') }}</small><br>
-                                                <small class="text-muted">
-                                                    Login: {{ session('login_at') ?? '-' }}
-                                                </small>
                                             </li>
 
                                             <li>

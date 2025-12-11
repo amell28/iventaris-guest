@@ -50,7 +50,7 @@ class PemeliharaanAsetController extends Controller
             Media::create([
                 'ref_table' => 'pemeliharaan_aset',
                 'ref_id'    => $pem->pemeliharaan_id,
-                'file_url'  => $path,
+                'file_name'  => $path,
                 'caption'   => 'Bukti Pemeliharaan',
                 'mime_type' => $request->file('media_file')->getMimeType(),
                 'sort_order'=> 1,
@@ -95,7 +95,7 @@ class PemeliharaanAsetController extends Controller
                     'ref_id'    => $pemeliharaan->pemeliharaan_id,
                 ],
                 [
-                    'file_url'  => $path,
+                    'file_name'  => $path,
                     'caption'   => 'Bukti Pemeliharaan',
                     'mime_type' => $request->file('media_file')->getMimeType(),
                     'sort_order'=> 1,

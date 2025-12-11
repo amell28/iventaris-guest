@@ -17,7 +17,6 @@ class User extends Authenticatable
         'password',
         'role',           // ← Role user
         'profile_photo',  // ← Foto profil
-        'login_at',       // ← Terakhir login
     ];
 
     protected $hidden = [
@@ -25,12 +24,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * CAST agar login_at otomatis menjadi Carbon instance
-     */
-    protected $casts = [
-        'login_at' => 'datetime',
-    ];
 
     /**
      * Scope Filter

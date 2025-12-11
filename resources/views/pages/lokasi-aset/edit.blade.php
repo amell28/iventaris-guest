@@ -103,7 +103,7 @@
                                         <label class="form-label"><i class="bi bi-image-fill me-2"></i>Foto Lokasi (Opsional)</label><br>
 
                                         @if($lokasiAset->media->first())
-                                            <img src="{{ asset('storage/' . $lokasiAset->media->first()->file_url) }}"
+                                            <img src="{{ asset('storage/' . $lokasiAset->media->first()->file_name) }}"
                                                  class="rounded shadow mb-2" width="150">
                                         @endif
 

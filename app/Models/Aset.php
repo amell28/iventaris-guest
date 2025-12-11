@@ -19,16 +19,13 @@ class Aset extends Model
         'kode_aset',
         'nama_aset',
         'kategori_id',
-        'tanggal_perolehan', // ← WAJIB ADA!
+        'tgl_perolehan', // ← WAJIB ADA!
         'nilai_perolehan',
         'kondisi',
-        'lokasi',
-        'penanggung_jawab',
-        'keterangan',
     ];
 
     protected $casts = [
-        'tanggal_perolehan' => 'date',
+        'tgl_perolehan' => 'date',
         'nilai_perolehan'   => 'decimal:2',
     ];
 

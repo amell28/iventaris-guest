@@ -87,7 +87,7 @@
         <div class="row">
             @forelse ($aset as $item)
                 @php
-                    $foto = optional($item->media->first())->file_url;
+                    $foto = optional($item->media->first())->file_name;
                 @endphp
 
                 <div class="col-xl-4 col-lg-6 col-md-6 mb-4">
@@ -131,17 +131,10 @@
                                 <div class="info-icon"><i class="lni lni-calendar"></i></div>
                                 <div class="info-content">
                                     <strong>Tanggal Perolehan</strong><br>
-                                    {{ \Carbon\Carbon::parse($item->tanggal_perolehan)->format('d M Y') }}
+                                    {{ \Carbon\Carbon::parse($item->tgl_perolehan)->format('d M Y') }}
                                 </div>
                             </div>
 
-                            <div class="info-item">
-                                <div class="info-icon"><i class="bi bi-person-badge-fill"></i></div>
-                                <div class="info-content">
-                                    <strong>Penanggung Jawab</strong><br>
-                                    {{ $item->penanggung_jawab }}
-                                </div>
-                            </div>
 
                         </div>
 

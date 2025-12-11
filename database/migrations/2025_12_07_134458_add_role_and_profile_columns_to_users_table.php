@@ -23,10 +23,6 @@ return new class extends Migration
                 $table->string('profile_photo')->nullable()->after('role');
             }
 
-            // Tambah kolom LOGIN_AT jika belum ada
-            if (!Schema::hasColumn('users', 'login_at')) {
-                $table->timestamp('login_at')->nullable()->after('profile_photo');
-            }
         });
     }
 
@@ -43,10 +39,6 @@ return new class extends Migration
 
             if (Schema::hasColumn('users', 'profile_photo')) {
                 $table->dropColumn('profile_photo');
-            }
-
-            if (Schema::hasColumn('users', 'login_at')) {
-                $table->dropColumn('login_at');
             }
         });
     }

@@ -59,10 +59,6 @@ class AuthController extends Controller
             return back()->withErrors(['password' => 'Password salah'])->withInput();
         }
 
-        //  UPDATE WAKTU LOGIN TERAKHIR
-        $user->update([
-            'login_at' => now()
-        ]);
 
         //  SIMPAN SESSION LOGIN
         Session::put('login', true);

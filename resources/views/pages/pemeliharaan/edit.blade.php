@@ -107,7 +107,7 @@
                                         @php $media = $pemeliharaan->media->first(); @endphp
 
                                         @if ($media)
-                                            <img src="{{ asset('storage/'.$media->file_url) }}"
+                                            <img src="{{ asset('storage/'.$media->file_name) }}"
                                                  class="img-thumbnail mt-2"
                                                  style="height:150px; width:100%; object-fit:cover; border-radius:10px;">
                                         @endif

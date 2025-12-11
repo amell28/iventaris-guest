@@ -29,11 +29,9 @@ class AsetController extends Controller
             'kode_aset'         => 'required|unique:aset,kode_aset',
             'nama_aset'         => 'required',
             'kategori_id'       => 'required|exists:kategori_aset,kategori_id',
-            'tanggal_perolehan' => 'required|date',
+            'tgl_perolehan' => 'required|date',
             'nilai_perolehan'   => 'required|numeric',
             'kondisi'           => 'required|in:Baik,Rusak Ringan,Rusak Berat',
-            'lokasi'            => 'required',
-            'penanggung_jawab'  => 'required',
             'media_file'        => 'nullable|image|max:2048',
         ]);
 
@@ -42,12 +40,9 @@ class AsetController extends Controller
             'kode_aset'         => $request->kode_aset,
             'nama_aset'         => $request->nama_aset,
             'kategori_id'       => $request->kategori_id,
-            'tanggal_perolehan' => $request->tanggal_perolehan,
+            'tgl_perolehan' => $request->tgl_perolehan,
             'nilai_perolehan'   => $request->nilai_perolehan,
             'kondisi'           => $request->kondisi,
-            'lokasi'            => $request->lokasi,
-            'penanggung_jawab'  => $request->penanggung_jawab,
-            'keterangan'        => $request->keterangan,
         ]);
 
         // ========== SIMPAN FOTO ==========
@@ -57,7 +52,7 @@ class AsetController extends Controller
             Media::create([
                 'ref_table'  => 'aset',
                 'ref_id'     => $aset->aset_id, // ← sekarang TIDAK ERROR
-                'file_url'   => $path,
+                'file_name'   => $path,
                 'caption'    => 'Foto Aset',
                 'mime_type'  => $request->file('media_file')->getMimeType(),
                 'sort_order' => 1,
@@ -80,11 +75,9 @@ class AsetController extends Controller
             'kode_aset'         => 'required|unique:aset,kode_aset,' . $aset->aset_id . ',aset_id',
             'nama_aset'         => 'required',
             'kategori_id'       => 'required|exists:kategori_aset,kategori_id',
-            'tanggal_perolehan' => 'required|date',
+            'tgl_perolehan' => 'required|date',
             'nilai_perolehan'   => 'required|numeric',
             'kondisi'           => 'required|in:Baik,Rusak Ringan,Rusak Berat',
-            'lokasi'            => 'required',
-            'penanggung_jawab'  => 'required',
             'media_file'        => 'nullable|image|max:2048',
         ]);
 
@@ -92,12 +85,9 @@ class AsetController extends Controller
             'kode_aset'         => $request->kode_aset,
             'nama_aset'         => $request->nama_aset,
             'kategori_id'       => $request->kategori_id,
-            'tanggal_perolehan' => $request->tanggal_perolehan,
+            'tgl_perolehan' => $request->tgl_perolehan,
             'nilai_perolehan'   => $request->nilai_perolehan,
             'kondisi'           => $request->kondisi,
-            'lokasi'            => $request->lokasi,
-            'penanggung_jawab'  => $request->penanggung_jawab,
-            'keterangan'        => $request->keterangan,
         ]);
 
         // ========== UPDATE FOTO ==========
@@ -110,7 +100,7 @@ class AsetController extends Controller
                     'ref_id'    => $aset->aset_id,
                 ],
                 [
-                    'file_url'   => $path,
+                    'file_name'   => $path,
                     'caption'    => 'Foto Aset',
                     'mime_type'  => $request->file('media_file')->getMimeType(),
                     'sort_order' => 1,

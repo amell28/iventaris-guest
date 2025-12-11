@@ -16,12 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('kategori_id'); // FK kategori
             $table->string('kode_aset')->unique();
             $table->string('nama_aset');
-            $table->date('tanggal_perolehan');
+            $table->date('tgl_perolehan');
             $table->decimal('nilai_perolehan', 15, 2);
             $table->enum('kondisi', ['Baik', 'Rusak Ringan', 'Rusak Berat']);
-            $table->string('lokasi');
-            $table->string('penanggung_jawab');
-            $table->text('keterangan')->nullable();
             $table->timestamps();
 
             // Foreign key menuju kategori_aset

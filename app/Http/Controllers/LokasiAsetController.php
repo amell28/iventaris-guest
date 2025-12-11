@@ -53,7 +53,7 @@ class LokasiAsetController extends Controller
             Media::create([
                 'ref_table' => 'lokasi_aset',
                 'ref_id'    => $lokasi->lokasi_id,
-                'file_url'  => $path,
+                'file_name'  => $path,
                 'caption'   => 'Foto Lokasi',
                 'mime_type' => $request->file('media_file')->getClientMimeType(),
                 'sort_order'=> 1,
@@ -101,8 +101,8 @@ class LokasiAsetController extends Controller
                 ->first();
 
             // hapus foto lama dari storage
-            if ($oldMedia && Storage::disk('public')->exists($oldMedia->file_url)) {
-                Storage::disk('public')->delete($oldMedia->file_url);
+            if ($oldMedia && Storage::disk('public')->exists($oldMedia->file_name)) {
+                Storage::disk('public')->delete($oldMedia->file_name);
             }
 
             // upload foto baru
@@ -114,7 +114,7 @@ class LokasiAsetController extends Controller
                     'ref_id'    => $lokasiAset->lokasi_id,
                 ],
                 [
-                    'file_url'  => $path,
+                    'file_name'  => $path,
                     'caption'   => 'Foto Lokasi',
                     'mime_type' => $request->file('media_file')->getClientMimeType(),
                     'sort_order'=> 1,
@@ -134,8 +134,8 @@ class LokasiAsetController extends Controller
             ->get();
 
         foreach ($medias as $media) {
-            if (Storage::disk('public')->exists($media->file_url)) {
-                Storage::disk('public')->delete($media->file_url);
+            if (Storage::disk('public')->exists($media->file_name)) {
+                Storage::disk('public')->delete($media->file_name);
             }
             $media->delete();
         }
